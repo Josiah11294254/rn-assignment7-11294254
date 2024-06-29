@@ -2,19 +2,15 @@
 
 # React Native App
 
-This is a react native app  that designed to demonstrate some react native concepts like keeping state with context, enabling theme swithces and finally building the UI itself(Involved the usage of several react native components)
+This is a react application that badically demonstates AsyncStorage in react native. When a users adds an item to the cart, the item(which is an object) is saved into local storage using Asyncstorage.
 
 ## How I went about it
 
-1. To first get the theme working for the application, I create a Theme provider component and wrapped my app component in it to handle thte theme of the whole application
-2. I also set up the bottom tab navigator inside the app.js file to enable navigation of screens.
-3.  I then created the home page which contained several react native components(Views,flatList,Text,Touchableopacity etc.) I contructively put these components together to make the homepage
-4.  I then created the settings page which holds a just a few links and contains the switch for toggling the theme mode
+I chose to use aysnc storage because it works perfectly for small sums of data like these. As usual, I set up the page navigation in the ```App.js``` . Initially the products are rendered on the homescreen. When an items is clicked at the add button. it updates the cartlist and renders the UI respectively.
 
 <p>
-  <img src="./assets/h1.png" alt="App Screenshot 1" height='450vh' width="25%"/>
-  <img src="./assets/h1w.png" alt="App Screenshot 2" height='450vh' width="25%"/>
-  <img src="./assets/ds.png" alt="App Screenshot 2" height='450vh' width="25%"/>
+  <img src="./assets/ph2.png" alt="App Screenshot 1" height='450vh' width="25%"/>
+  <img src="./assets/ph1.png" alt="App Screenshot 2" height='450vh' width="25%"/>
 </p>
 
 
