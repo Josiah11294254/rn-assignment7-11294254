@@ -1,21 +1,48 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { Ionicons } from '@expo/vector-icons'; // Make sure to install expo vector icons or use another icon library
+import React, { useState } from "react";
+import {
+  ActivityIndicator,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import ProductDetails from "./ProductDetails"; // We'll create this component next
 
-const ProductItem = ({ product, onAddToCart }) => {
+const ProductItem = ({ product, addToCart }) => {
+  const [showDetails, setShowDetails] = useState(false);
+
   return (
     <View style={styles.productItem}>
-      <View style={styles.imageContainer}>
-        <Image source={product.image} style={styles.image} />
-        <TouchableOpacity 
-          style={styles.addButton} 
-          onPress={() => onAddToCart(product)}
-        >
-          <Ionicons name="add-circle" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.price}>${product.price}</Text>
+      {product ? (
+        <>
+          <TouchableOpacity
+            style={styles.imageContainer}
+            onPress={() => setShowDetails(true)}
+          >
+            <Image source={{ uri: product.image }} style={styles.image} />
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => addToCart(product)}
+            >
+              <Ionicons name="add" size={24} color="white" />
+            </TouchableOpacity>
+          </TouchableOpacity>
+          <Text style={styles.name}>{product.title.slice(0, 20)}</Text>
+          <Text style={styles.price}>${product.price}</Text>
+          {showDetails && (
+            <ProductDetails
+              product={product}
+              visible={showDetails}
+              onClose={() => setShowDetails(false)}
+              onAddToCart={addToCart}
+            />
+          )}
+        </>
+      ) : (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
     </View>
   );
 };
@@ -28,18 +55,23 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   imageContainer: {
-    position: 'relative',
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   image: {
-    width: "100%",
-    height: 240,
+    width: "80%",
+    height: 150,
     borderRadius: 8,
   },
   addButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 8,
     bottom: 8,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderWidth: 1,
+    borderColor: "white",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 15,
     padding: 4,
   },
@@ -51,7 +83,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 14,
     marginBottom: 4,
-    color: '#666',
+    color: "#666",
   },
 });
 
