@@ -10,7 +10,7 @@ I chose to use aysnc storage because it works perfectly for small sums of data l
 
 <p>
   <img src="./assets/p1.jpeg" alt="App Screenshot 1" height='450vh' width="25%"/>
-  <img src="./assets/p2.jpeg" alt="App Screenshot 2" height='450vh' width="25%"/>
+  <img src="./assets/p4.jpeg" alt="App Screenshot 2" height='450vh' width="25%"/>
   <img src="./assets/p3.jpeg" alt="App Screenshot 2" height='450vh' width="25%"/>
 </p>
 
