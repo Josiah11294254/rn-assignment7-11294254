@@ -9,9 +9,9 @@ This is a react application that basically demonstates the usage of the fetch/ax
 I chose to use aysnc storage because it works perfectly for small sums of data like these. As usual, I set up the page navigation in the ```App.js``` . Initially the products are rendered on the homescreen. When an items is clicked at the add button. it updates the cartlist and renders the UI respectively.
 
 <p>
-  <img src="./assets/p1.png" alt="App Screenshot 1" height='450vh' width="25%"/>
-  <img src="./assets/p2.png" alt="App Screenshot 2" height='450vh' width="25%"/>
-  <img src="./assets/p3.png" alt="App Screenshot 2" height='450vh' width="25%"/>
+  <img src="./assets/p1.jpeg" alt="App Screenshot 1" height='450vh' width="25%"/>
+  <img src="./assets/p2.jpeg" alt="App Screenshot 2" height='450vh' width="25%"/>
+  <img src="./assets/p3.jpeg" alt="App Screenshot 2" height='450vh' width="25%"/>
 </p>
 
 
