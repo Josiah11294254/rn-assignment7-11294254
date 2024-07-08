@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: "80%",
-    height: 150,
+    width: "70%",
+    height: 130,
     borderRadius: 8,
   },
   addButton: {

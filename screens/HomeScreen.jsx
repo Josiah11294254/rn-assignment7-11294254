@@ -5,19 +5,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import axios from 'axios'
 
-const PRODUCTS = [
-  { id: "1", description:'', name: "Office Wear", price: 120, image: require('../assets/dress1.png') },
-  { id: "2", description:'', name: "Black", price: 120, image: require('../assets/dress2.png') },
-  { id: "3", description:'', name: "Church Wear", price: 120, image: require('../assets/dress3.png') },
-  { id: "4", description:'', name: "Lamerei", price: 120, image: require('../assets/dress4.png') },
-  { id: "5", description:'', name: "Lamerei", price: 120, image: require('../assets/dress5.png') },
-  { id: "6", description:'', name: "Lamerei", price: 120, image: require('../assets/dress6.png') },
-  { id: "8", description:'', name: "Lamerei", price: 120, image: require('../assets/dress7.png') },
-];
-
 const HomeScreen = ({ navigation }) => {
   const [cartItems, setCartItems] = useState([]);
-  const [allProducts,  setAllProducts] = useState()
+  const [allProducts, setAllProducts] = useState([]);
 
   const FetchProducts = () => {
     axios
@@ -28,7 +18,6 @@ const HomeScreen = ({ navigation }) => {
       })
       .catch((error) => console.error("Error fetching products:", error));
   };
-
 
   useEffect(() => {
     FetchProducts();
@@ -59,19 +48,20 @@ const HomeScreen = ({ navigation }) => {
           <Image source={require("../assets/Menu.png")} style={styles.icon} />
         </TouchableOpacity>
         <Text style={styles.title}>Open Fashion</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-          <Image source={require("../assets/Search.png")} style={styles.icon} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
-          <Text style={{textAlign:'right'}}>{cartItems.length}</Text>
-          <Image
-            source={require("../assets/shoppingBag.png")}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
+        <View style={styles.headerRight}>
+          <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+            <Image source={require("../assets/Search.png")} style={styles.icon} />
+          </TouchableOpacity>
+          <View style={styles.cartContainer}>
+            <Text style={styles.cartItemCount}>{cartItems.length}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
+              <Image source={require("../assets/shoppingBag.png")} style={styles.icon} />
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-      <View style={styles.containerr}>
-        <Text style={styles.titlee}>OUR STORY</Text>
+      <View style={styles.storyContainer}>
+        <Text style={styles.storyTitle}>OUR STORY</Text>
         <View style={styles.iconContainer}>
           <View style={styles.line} />
           <View style={styles.iconCircle}>
@@ -86,9 +76,9 @@ const HomeScreen = ({ navigation }) => {
         data={allProducts}
         numColumns={2}
         renderItem={({ item }) => (
-          <ProductItem product={item} addToCart={addToCart} /> 
+          <ProductItem product={item} addToCart={addToCart} />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.productList}
       />
     </View>
@@ -100,14 +90,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 40,
   },
-  containerr: {
-    width: '100%',
-    marginVertical: 20,
-    paddingHorizontal: 16,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -116,11 +98,43 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  cartContainer: {
+    position: "relative",
+    marginLeft: 20,
+  },
+  cartItemCount: {
+    position: "absolute",
+    top: -10,
+    right: -10,
+    backgroundColor: "red",
+    color: "white",
+    borderRadius: 10,
+    padding: 2,
+    paddingHorizontal: 5,
+    fontSize: 12,
+    zIndex: 1,
+  },
   icon: {
     width: 24,
     height: 24,
   },
-  titlee: {
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  storyContainer: {
+    width: '100%',
+    marginVertical: 20,
+    paddingHorizontal: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  storyTitle: {
     fontSize: 18,
     fontWeight: '400',
     letterSpacing: 4,
@@ -139,20 +153,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: '#eeede9',
     marginHorizontal: 4,
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
   productList: {
-    padding: 6,
-    gap: 6,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    padding: 10,
   },
 });
 

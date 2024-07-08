@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
-import { Text, View } from 'react-native';
+import { Text, View,TouchableOpacity } from 'react-native';
+import { DrawerActions } from '@react-navigation/native'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -12,8 +13,20 @@ const Drawer = createDrawerNavigator();
 const CustomDrawerContent = (props) => {
   return (
     <View style={{ flex: 1, paddingTop: 50, paddingLeft: 20 }}>
-      <Text onPress={() => props.navigation.navigate('Home')} style={{ marginBottom: 20 }}>Home</Text>
-      <Text onPress={() => props.navigation.navigate('Cart')} style={{ marginBottom: 20 }}>Cart</Text>
+      <TouchableOpacity
+        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
+        style={{ marginBottom: 30 }}
+      >
+        <Text style={{ fontSize: 20 }}>✕</Text>
+      </TouchableOpacity>
+      <Text style={{ fontSize: 24, marginBottom: 20 }}>ERIC ATSU</Text>
+      <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: '30%', marginBottom: 30 }} />
+      <Text onPress={() => props.navigation.navigate('Store')} style={{ marginBottom: 20 }}>Store</Text>
+      <Text onPress={() => props.navigation.navigate('Locations')} style={{ marginBottom: 20 }}>Locations</Text>
+      <Text onPress={() => props.navigation.navigate('Blog')} style={{ marginBottom: 20 }}>Blog</Text>
+      <Text onPress={() => props.navigation.navigate('Jewelry')} style={{ marginBottom: 20 }}>Jewelry</Text>
+      <Text onPress={() => props.navigation.navigate('Electronic')} style={{ marginBottom: 20 }}>Electronic</Text>
+      <Text onPress={() => props.navigation.navigate('Clothing')} style={{ marginBottom: 20 }}>Clothing</Text>
     </View>
   );
 };
